@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: text_to_sql_mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: vaibhav
+      MYSQL_DATABASE: regional_sales_data
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+
+  app:
+    build: .
+    container_name: text_to_sql_app
+    environment:
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_USER: root
+      DB_PASSWORD: vaibhav
+      DB_NAME: regional_sales_data
+      GOOGLE_API_KEY: ${GOOGLE_API_KEY}
+    ports:
+      - "8501:8501"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    volumes:
+      - ./logs:/app/logs
+      - ./Data_CSV:/app/Data_CSV
+
+volumes:
+  mysql_data:
+
+networks:
+  default:
+    name: text_to_sql_network
