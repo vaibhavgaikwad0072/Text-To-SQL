@@ -18,7 +18,7 @@ DB_CONFIG = {
 LLM_CONFIG = {
     "model": "gemini-2.0-flash",
     "provider": "google_genai",
-    "api_key": os.getenv("GOOGLE_API_KEY", "AIzaSyDNgg9I19YxUXdnH3m29khFiUG48an1Sbw"),
+    "api_key": os.getenv("GOOGLE_API_KEY", "api-key"),
 }
 
 # Agent Configuration
