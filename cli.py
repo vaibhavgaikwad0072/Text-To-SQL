@@ -85,7 +85,7 @@ Available commands:
                 """)
                 continue
             
-            print("\n⏳ Processing...")
+            print("\ Processing...")
             result = pipeline.query(query, verbose=False)
             print_text_result(result, verbose=False)
             
@@ -103,13 +103,13 @@ def print_text_result(result, verbose=False):
     print("="*60)
     
     if result["status"] == "error":
-        print(f"❌ Error: {result.get('error', 'Unknown error')}")
+        print(f" Error: {result.get('error', 'Unknown error')}")
     else:
-        print(f"\n📌 Question: {result['question']}")
-        print(f"\n✅ Answer:\n{result['answer']}")
+        print(f"\n Question: {result['question']}")
+        print(f"\n Answer:\n{result['answer']}")
         
         if verbose and result["steps"]:
-            print(f"\n📊 Execution Steps ({len(result['steps'])} steps):")
+            print(f"\n Execution Steps ({len(result['steps'])} steps):")
             print("-" * 60)
             for i, step in enumerate(result["steps"], 1):
                 print(f"\nStep {i}: {step['type']}")
